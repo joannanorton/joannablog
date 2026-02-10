@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fancy Navigation Block</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Roboto", sans-serif;
+    }
+
+    .fancy-nav {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      color: #393838;
+    }
+
+    .fancy-nav::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1;
+    }
+
+    /* Images */
+    .fancy-nav__imgs,
+    .fancy-nav__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fancy-nav__img {
+      transition: opacity 0.2s linear;
+    }
+
+    .fancy-nav__img:not(:first-child) {
+      opacity: 0;
+    }
+
+    .fancy-nav__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* List */
+    .fancy-nav__list {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      height: 100%;
+    }
+
+    .fancy-nav__item {
+      width: 100%;
+      height: 25%;
+      display: flex;
+      align-items: flex-end;
+      cursor: pointer;
+      border-bottom: 2px solid #fff;
+      overflow: hidden;
+    }
+
+    .fancy-nav__item-details {
+      width: 100%;
+      padding: 20px;
+      transform: translateY(110px);
+      transition: all 0.2s linear;
+    }
+
+    .fancy-nav__item:hover .fancy-nav__item-details {
+      transform: translateY(0);
+    }
+
+    .fancy-nav__item:nth-child(1):hover .fancy-nav__item-details { background: #304949; }
+    .fancy-nav__item:nth-child(2):hover .fancy-nav__item-details { background: #954722; }
+    .fancy-nav__item:nth-child(3):hover .fancy-nav__item-details { background: #ca4985; }
+    .fancy-nav__item:nth-child(4):hover .fancy-nav__item-details { background: #5c7450; }
+
+    .fancy-nav__title {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .fancy-nav__description {
+      color: #fff;
+      line-height: 1.5rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      transform: translateY(20px);
+      transition: transform 0.2s linear 0.1s;
+    }
+
+    .fancy-nav__item:hover .fancy-nav__description {
+      transform: translateY(0);
+    }
+
+    .fancy-nav__more-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transform: translateY(30px);
+      transition: transform 0.2s linear 0.1s;
+    }
+
+    .fancy-nav__item:hover .fancy-nav__more-btn {
+      transform: translateY(0);
+    }
+
+    /* Tabs */
+    .fancy-nav__tabs {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .fancy-nav__tabs.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .fancy-nav__tab {
+      position: absolute;
+      inset: 0;
+      padding: 15px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .fancy-nav__tab.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s linear;
+    }
+
+    .fancy-nav__tab:nth-child(1) { background: #304949; }
+    .fancy-nav__tab:nth-child(2) { background: #954722; }
+    .fancy-nav__tab:nth-child(3) { background: #ca4985; }
+    .fancy-nav__tab:nth-child(4) { background: #5c7450; }
+
+    .fancy-nav__tab-container {
+      max-width: 1220px;
+      margin: auto;
+    }
+
+    .fancy-nav__tab-img {
+      height: 250px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .fancy-nav__tab-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fancy-nav__tab-description {
+      background: #fff;
+      padding: 20px;
+    }
+
+    .fancy-nav__tab-title {
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .fancy-nav__close-btn {
+      width: 25px;
+      height: 25px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      margin-left: auto;
+      margin-bottom: 15px;
+    }
+
+    .fancy-nav__close-btn::before,
+    .fancy-nav__close-btn::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 120%;
+      height: 3px;
+      background: #fff;
+    }
+
+    .fancy-nav__close-btn::before {
+      transform: rotate(45deg);
+    }
+
+    .fancy-nav__close-btn::after {
+      transform: rotate(-45deg);
+    }
+
+    @media (min-width: 750px) {
+      .fancy-nav__item {
+        width: 50%;
+        height: 50%;
+        border-right: 2px solid #fff;
+      }
+    }
+
+    @media (min-width: 1400px) {
+      .fancy-nav__item {
+        width: 25%;
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fancy-nav">
+
+    <div class="fancy-nav__imgs">
+      <div class="fancy-nav__img"><img src="https://user-images.githubusercontent.com/13468728/234031693-6bbaba7d-632c-4d7d-965f-75a76a549ce2.jpg"></div>
+      <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior2.jpg"></div>
+      <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior3.jpg"></div>
+      <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior4.jpg"></div>
+    </div>
+
+    <div class="fancy-nav__list">
+      <div class="fancy-nav__item"><div class="fancy-nav__item-details"><h3 class="fancy-nav__title">We’re not afraid to rethink things</h3><div class="fancy-nav__description"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p></div><button class="fancy-nav__more-btn">Read More</button></div></div>
+      <div class="fancy-nav__item"><div class="fancy-nav__item-details"><h3 class="fancy-nav__title">Enthusiastic creators for living environments</h3><div class="fancy-nav__description"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p></div><button class="fancy-nav__more-btn">Read More</button></div></div>
+      <div class="fancy-nav__item"><div class="fancy-nav__item-details"><h3 class="fancy-nav__title">Create modern yet timeless experiences</h3><div class="fancy-nav__description"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p></div><button class="fancy-nav__more-btn">Read More</button></div></div>
+      <div class="fancy-nav__item"><div class="fancy-nav__item-details"><h3 class="fancy-nav__title">Ultimately, design is about being</h3><div class="fancy-nav__description"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p></div><button class="fancy-nav__more-btn">Read More</button></div></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="fancy-nav__tabs">
+      <div class="fancy-nav__tab"><div class="fancy-nav__tab-container"><button class="fancy-nav__close-btn"></button><div class="fancy-nav__tab-img"><img src="https://assets.codepen.io/3341051/interior1.jpg"></div><div class="fancy-nav__tab-description"><h3 class="fancy-nav__tab-title">We’re not afraid to rethink things</h3><p>Full content goes here…</p></div></div></div>
+      <div class="fancy-nav__tab"><div class="fancy-nav__tab-container"><button class="fancy-nav__close-btn"></button><div class="fancy-nav__tab-img"><img src="https://assets.codepen.io/3341051/interior2.jpg"></div><div class="fancy-nav__tab-description"><h3 class="fancy-nav__tab-title">Enthusiastic creators</h3><p>Full content goes here…</p></div></div></div>
+      <div class="fancy-nav__tab"><div class="fancy-nav__tab-container"><button class="fancy-nav__close-btn"></button><div class="fancy-nav__tab-img"><img src="https://assets.codepen.io/3341051/interior3.jpg"></div><div class="fancy-nav__tab-description"><h3 class="fancy-nav__tab-title">Modern experiences</h3><p>Full content goes here…</p></div></div></div>
+      <div class="fancy-nav__tab"><div class="fancy-nav__tab-container"><button class="fancy-nav__close-btn"></button><div class="fancy-nav__tab-img"><img src="https://assets.codepen.io/3341051/interior4.jpg"></div><div class="fancy-nav__tab-description"><h3 class="fancy-nav__tab-title">Design is about being</h3><p>Full content goes here…</p></div></div></div>
+    </div>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll(".fancy-nav__item");
+    const imgs = document.querySelectorAll(".fancy-nav__img");
+    const tabs = document.querySelectorAll(".fancy-nav__tab");
+    const tabList = document.querySelector(".fancy-nav__tabs");
+
+    items.forEach((item, i) => {
+      item.addEventListener("mouseover", () => {
+        imgs.forEach(img => img.style.opacity = 0);
+        imgs[i].style.opacity = 1;
+      });
+
+      item.addEventListener("click", () => {
+        tabList.classList.add("is-visible");
+        tabs[i].classList.add("is-visible");
+      });
+    });
+
+    tabs.forEach((tab, i) => {
+      tab.querySelector(".fancy-nav__close-btn").addEventListener("click", () => {
+        tab.classList.remove("is-visible");
+        tabList.classList.remove("is-visible");
+      });
+    });
+  </script>
+</body>
+</html>
