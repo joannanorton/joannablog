@@ -232,6 +232,136 @@
         height: 100%;
       }
     }
+    html, body {
+  margin: 0;
+  background: #000;
+  font-family: Arial, sans-serif;
+}
+
+.scene {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Keep 3D centered */
+.container {
+  perspective: 2000px;
+  width: 300px;
+  height: 300px;
+  margin: 120px auto 60px auto; /* 👈 spacing */
+  position: relative;
+}
+.info-section {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 40px 20px;
+}
+
+.info-section h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.info-section p {
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+  opacity: 0.8;
+}
+
+.info-section button {
+  padding: 12px 28px;
+  background: rgba(255,255,255,0,1);
+  border: 1px solid white;
+  color: white;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  font-weight: bold;
+}
+#ring {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.img {
+  position: absolute;
+  width: 400px;
+  height: 250px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#dragger {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  cursor: grab;
+  z-index: 10;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8));
+}
+.container {
+  perspective: 2000px;
+  width: 100%;
+  height: 400px;
+  margin: 150px auto 40px auto;
+  position: relative;
+}
+.card {
+  box-shadow: 0 70px 63px -60px #000000;
+  transition: background 1s;
+}
+
+.card0 {
+  background: url('https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg');
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card0:hover {
+  background-size: 600px;
+  background-position: left center;
+}
+
+.card1 {
+  background: url('https://i.pinimg.com/originals/28/d2/e6/28d2e684e7859a0dd17fbd0cea00f8a9.jpg');
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card1:hover {
+  background-size: 600px;
+  background-position: left center;
+}
+
+.card2 {
+  background: url('https://i.pinimg.com/originals/ee/85/08/ee850842e68cfcf6e3943c048f45c6d1.jpg');
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card2:hover {
+  background-size: 600px;
+  background-position: left center;
+}
+
+
+
   </style>
 </head>
 
@@ -239,7 +369,7 @@
   <div class="fancy-nav">
 
     <div class="fancy-nav__imgs">
-      <div class="fancy-nav__img"><img src="https://user-images.githubusercontent.com/13468728/234031693-6bbaba7d-632c-4d7d-965f-75a76a549ce2.jpg"></div>
+      <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior1.jpg"></div>
       <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior2.jpg"></div>
       <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior3.jpg"></div>
       <div class="fancy-nav__img"><img src="https://assets.codepen.io/3341051/interior4.jpg"></div>
@@ -260,6 +390,84 @@
       <div class="fancy-nav__tab"><div class="fancy-nav__tab-container"><button class="fancy-nav__close-btn"></button><div class="fancy-nav__tab-img"><img src="https://assets.codepen.io/3341051/interior4.jpg"></div><div class="fancy-nav__tab-description"><h3 class="fancy-nav__tab-title">Design is about being</h3><p>Full content goes here…</p></div></div></div>
     </div>
   </div>
+
+  <div class="scene">
+
+    <div class="container">
+      <div id="ring">
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+        <div class="img"></div>
+      </div>
+      <div class="vignette"></div>
+      <div id="dragger"></div>
+    </div>
+  
+    <!-- 👇 NEW SECTION UNDER IMAGES -->
+    <div class="info-section">
+      <h2>Gallery Title</h2>
+      <p>This is some content under the rotating image ring.</p>
+      <button>View More</button>
+    </div>
+    <div class="flex flex-col space-y-10 items-center lg:flex-row lg:justify-around lg:h-screen bg-black overflow-y-auto py-20">
+
+      <!-- CARD 1 -->
+      <div class="card card0 w-72 h-80 rounded overflow-hidden bg-black flex justify-center items-center relative">
+        <div class="h-72 w-64 hover:border hover:border-white transition-all">
+          <h2 class="text-white ml-4 pt-5 text-xl font-semibold">Al Pacino</h2>
+          <div class="icons flex flex-col text-white absolute top-44 space-y-2 ml-4">
+            <i class="fa fa-codepen"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-dribbble"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-facebook"></i>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CARD 2 -->
+      <div class="card card1 w-72 h-80 rounded overflow-hidden bg-black flex justify-center items-center relative">
+        <div class="h-72 w-64 hover:border hover:border-white transition-all">
+          <h2 class="text-white ml-4 pt-5 text-xl font-semibold">Ben Stiller</h2>
+          <div class="icons flex flex-col text-white absolute top-44 space-y-2 ml-4">
+            <i class="fa fa-codepen"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-dribbble"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-facebook"></i>
+          </div>
+        </div>
+      </div>
+  
+      <!-- CARD 3 -->
+      <div class="card card2 w-72 h-80 rounded overflow-hidden bg-black flex justify-center items-center relative">
+        <div class="h-72 w-64 hover:border hover:border-white transition-all">
+          <h2 class="text-white ml-4 pt-5 text-xl font-semibold">Patrick Stewart</h2>
+          <div class="icons flex flex-col text-white absolute top-44 space-y-2 ml-4">
+            <i class="fa fa-codepen"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-dribbble"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-facebook"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
 
   <script>
     const items = document.querySelectorAll(".fancy-nav__item");
@@ -285,6 +493,56 @@
         tabList.classList.remove("is-visible");
       });
     });
+
+    let xPos = 0;
+
+gsap.timeline()
+    .set(dragger, { opacity:0 }) //make the drag layer invisible
+    .set(ring,    { rotationY:180 }) //set initial rotationY so the parallax jump happens off screen
+    .set('.img',  { // apply transform rotations to each image
+      rotateY: (i)=> i*-36,
+      transformOrigin: '50% 50% 500px',
+      z: -500,
+      backgroundImage:(i)=>'url(https://picsum.photos/id/'+(i+32)+'/700/300/)',
+      backgroundPosition:(i)=>getBgPos(i),
+      backfaceVisibility:'hidden'
+    })    
+    .from('.img', {
+      duration:1.5,
+      y:200,
+      opacity:0,
+      stagger:0.1,
+      ease:'expo'
+    })
+
+Draggable.create(dragger, {
+  
+  onDragStart:(e)=>{ 
+    if (e.touches) e.clientX = e.touches[0].clientX;
+    xPos = Math.round(e.clientX);
+  },
+  
+  onDrag:(e)=>{
+    if (e.touches) e.clientX = e.touches[0].clientX;    
+    
+    gsap.to(ring, {
+      rotationY: '-=' +( (Math.round(e.clientX)-xPos)%360 ),
+      onUpdate: ()=>{gsap.set('.img', { backgroundPosition:(i)=>getBgPos(i) }) }
+    });
+    
+    xPos = Math.round(e.clientX);
+  },
+  
+  onDragEnd:()=> {
+    // gsap.to(ring, { rotationY: Math.round(gsap.getProperty(ring,'rotationY')/36)*36 }) // move to nearest photo...at the expense of the inertia effect
+    gsap.set(dragger, {x:0, y:0}) // reset drag layer
+  }
+  
+})
+
+
+function getBgPos(i){ //returns the background-position string to create parallax movement in each image
+  return ( -gsap.utils.wrap(0,360,gsap.getProperty(ring, 'rotationY')-180-i*36)/360*400 )+'px 0px';
+}
   </script>
-</body>
 </html>
